@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bg-gradient{
+    background: linear-gradient(to bottom right, white 40%, #707364 60% );
+    /* background-color: aqua; */
+    background: linear-gradient(to bottom , white 40%, #707364);
+
+}
