@@ -67,6 +67,13 @@ const CheckoutPage: React.FC = () => {
               >
                 Proceed to Payment
               </IonButton>
+              <IonButton
+                expand="full"
+                className="mt-5"
+                routerLink="/store"
+              >
+                Go Home
+              </IonButton>
             </IonCardContent>
           </IonCard>
           <IonToast

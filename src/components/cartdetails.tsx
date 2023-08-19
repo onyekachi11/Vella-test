@@ -28,7 +28,7 @@ const Cartdetails: React.FC<Cartdetails2Props> = ({ openModal }) => {
     const data: string | null = localStorage.getItem("persist:root");
     if (data !== null) {
       const data2 = JSON.parse(data);
-      console.log(data2.userDetails);
+
       delete data2.cartDetails;
       delete data2.cartValue;
       delete data2.products;

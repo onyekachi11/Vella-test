@@ -7,8 +7,9 @@ import {
   IonButton,
   IonModal,
   IonButtons,
+  IonToast,
 } from "@ionic/react";
-import React, { useRef } from "react";
+import React, { useRef,useState } from "react";
 import { useAppSelector } from "../app/hooks";
 import { RootState } from "../app/store";
 import UserDetails from "../pages/userDetails";
@@ -19,7 +20,6 @@ const Cart: React.FC = () => {
     (state: RootState) => state.persistedReducer.userDetails
   );
 
-  console.log(userDetails);
   const modal = useRef<HTMLIonModalElement>(null);
 
   const confirm = () => {
@@ -37,6 +37,7 @@ const Cart: React.FC = () => {
       modal.current.present();
     }
   };
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <IonPage>
@@ -52,8 +53,7 @@ const Cart: React.FC = () => {
         </div>
 
         {/*****  dissplay modal for user entry **************/}
-        <div> 
-          { userDetails.username === '' ?
+        <div>
           <IonModal ref={modal}>
             <IonHeader>
               <IonToolbar>
@@ -71,7 +71,12 @@ const Cart: React.FC = () => {
                     strong={true}
                     routerLink="/checkout"
                     onClick={() => {
-                      userDetails.username === "" ? null : confirm();
+                      userDetails.username === "" ||
+                      userDetails.address === "" ||
+                      userDetails.email === ""
+                        ? setIsOpen(true)
+                        : confirm();
+                        
                     }}
                   >
                     Confirm
@@ -83,8 +88,15 @@ const Cart: React.FC = () => {
             {/*****  where users input details **************/}
             <UserDetails />
           </IonModal>
-          : null }
         </div>
+        <IonToast
+          isOpen={isOpen}
+          message="Please complete details"
+          onDidDismiss={() => setIsOpen(false)}
+          duration={5000}
+          color={"primary"}
+          icon="globe"
+        ></IonToast>
       </IonContent>
     </IonPage>
   );

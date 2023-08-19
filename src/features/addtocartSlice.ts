@@ -53,7 +53,6 @@ const addToCartSlice = createSlice({
       if (cartItem) {
         if (cartItem.amount > 1) {
           cartItem.amount -= 1;
-          console.log(cartItem.price);
         }
       }
     },
